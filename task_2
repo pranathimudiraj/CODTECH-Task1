@@ -1,0 +1,58 @@
+/*  to calculate the letter grade based on the average grade */
+def calculate_average(grades):
+    return sum(grades) / len(grades)
+
+
+def calculate_letter_grade(average_grade):
+    if average_grade >= 90:
+        return 'A'
+    elif average_grade >= 80:
+        return 'B'
+    elif average_grade >= 70:
+        return 'C'
+    elif average_grade >= 60:
+        return 'D'
+    else:
+        return 'F'
+
+print("Welcome to the Student Grade Management System!")
+
+# Initialize an empty dictionary to store grades for different subjects or assignments
+grades = {}
+
+while True:
+    print("\nOptions:")
+    print("1. Add grades for a subject")
+    print("2. Calculate average grade")
+    print("3. Exit")
+
+    choice = input("Enter your choice (1/2/3): ")
+
+    if choice == '1':
+        subject = input("Enter the subject or assignment name: ")
+        grade = float(input("Enter the grade for {}: ".format(subject)))
+        
+        # Check if the subject already exists in the dictionary
+        if subject in grades:
+            grades[subject].append(grade)
+        else:
+            grades[subject] = [grade]
+        print("Grade added successfully for", subject)
+    elif choice == '2':
+        # Check if there are any grades entered
+        if not grades:
+            print("No grades entered yet.")
+            continue
+        
+        # Calculate the average grade for each subject and display it
+        for subject, grade_list in grades.items():
+            average_grade = calculate_average(grade_list)
+            letter_grade = calculate_letter_grade(average_grade)
+            print("Subject:", subject)
+            print("Average Grade:", average_grade)
+            print("Letter Grade:", letter_grade)
+    elif choice == '3':
+        print("Exiting the Student Grade Management System. Goodbye!")
+        break
+    else:
+        print("Invalid choice! Please choose a valid option.")
